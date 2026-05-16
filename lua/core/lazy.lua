@@ -21,27 +21,18 @@ require("lazy").setup({
 
   -- Theme
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    "tanvirtin/monokai.nvim",
     priority = 1000,
 
     config = function()
-      require("catppuccin").setup({
-        flavour = "mocha",
-
-        integrations = {
-          treesitter = true,
-          nvimtree = true,
-          telescope = {
-            enabled = true,
-          },
-        },
+      require("monokai").setup({
+        palette = require("monokai").pro,
       })
 
-      vim.cmd("colorscheme catppuccin")
+      vim.cmd("colorscheme monokai")
     end,
   },
-
+  
   -- Statusline
   {
     "nvim-lualine/lualine.nvim",
@@ -52,7 +43,7 @@ require("lazy").setup({
     config = function()
       require("lualine").setup({
         options = {
-          theme = "catppuccin",
+          theme = "auto",
           section_separators = "",
           component_separators = "│",
         },
@@ -193,7 +184,6 @@ require("lazy").setup({
           "pyright",
           "tsserver",
           "rust_analyzer",
-          "gopls",
           "lua_ls",
         },
 
@@ -221,7 +211,6 @@ require("lazy").setup({
       "pyright",
       "ts_ls",
       "rust_analyzer",
-      "gopls",
       "lua_ls",
     }
 
