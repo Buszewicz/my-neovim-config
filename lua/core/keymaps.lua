@@ -1,68 +1,68 @@
 -- =============================================================================
---  core/keymaps.lua  –  skróty klawiszowe
+--  core/keymaps.lua
 -- =============================================================================
 
-vim.g.mapleader      = " "   -- <Space> jako leader
+vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local map = function(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc })
 end
 
--- ── Ogólne ──────────────────────────────────────────────────────────────────
-map("n", "<leader>w", "<cmd>w<cr>",  "Zapisz")
-map("n", "<leader>q", "<cmd>q<cr>",  "Zamknij")
-map("n", "<Esc>",     "<cmd>noh<cr>","Wyczyść podświetlenie")
+-- General
+map("n", "<leader>w", "<cmd>w<cr>", "Save file")
+map("n", "<leader>q", "<cmd>q<cr>", "Quit")
+map("n", "<Esc>", "<cmd>noh<cr>", "Clear search highlight")
 
--- ── Nawigacja po oknach ─────────────────────────────────────────────────────
-map("n", "<C-h>", "<C-w>h", "Okno lewo")
-map("n", "<C-l>", "<C-w>l", "Okno prawo")
-map("n", "<C-j>", "<C-w>j", "Okno dół")
-map("n", "<C-k>", "<C-w>k", "Okno góra")
+-- Window navigation
+map("n", "<C-h>", "<C-w>h", "Focus left window")
+map("n", "<C-l>", "<C-w>l", "Focus right window")
+map("n", "<C-j>", "<C-w>j", "Focus lower window")
+map("n", "<C-k>", "<C-w>k", "Focus upper window")
 
--- ── Podział okien ───────────────────────────────────────────────────────────
-map("n", "<leader>sv", "<cmd>vsplit<cr>", "Podziel pionowo")
-map("n", "<leader>sh", "<cmd>split<cr>",  "Podziel poziomo")
+-- Splits
+map("n", "<leader>sv", "<cmd>vsplit<cr>", "Vertical split")
+map("n", "<leader>sh", "<cmd>split<cr>", "Horizontal split")
 
--- ── Bufory ──────────────────────────────────────────────────────────────────
-map("n", "<S-l>", "<cmd>bnext<cr>",     "Następny bufor")
-map("n", "<S-h>", "<cmd>bprevious<cr>", "Poprzedni bufor")
-map("n", "<leader>x", "<cmd>bdelete<cr>","Zamknij bufor")
+-- Buffers
+map("n", "<S-l>", "<cmd>bnext<cr>", "Next buffer")
+map("n", "<S-h>", "<cmd>bprevious<cr>", "Previous buffer")
+map("n", "<leader>x", "<cmd>bdelete<cr>", "Close buffer")
 
--- ── Przesuwanie linii (tryb wizualny) ───────────────────────────────────────
-map("v", "J", ":m '>+1<cr>gv=gv", "Przesuń linię w dół")
-map("v", "K", ":m '<-2<cr>gv=gv", "Przesuń linię w górę")
+-- Move selected lines
+map("v", "J", ":m '>+1<cr>gv=gv", "Move line down")
+map("v", "K", ":m '<-2<cr>gv=gv", "Move line up")
 
--- ── Zachowanie schowka przy wklejaniu ───────────────────────────────────────
-map("v", "p", '"_dP', "Wklej bez nadpisania schowka")
+-- Preserve clipboard while pasting
+map("v", "p", '"_dP', "Paste without yanking")
 
--- ── LSP (aktywne gdy serwer podłączony) ─────────────────────────────────────
-map("n", "gd",         vim.lsp.buf.definition,      "Przejdź do definicji")
-map("n", "gD",         vim.lsp.buf.declaration,     "Przejdź do deklaracji")
-map("n", "gr",         vim.lsp.buf.references,      "Referencje")
-map("n", "K",          vim.lsp.buf.hover,           "Dokumentacja (hover)")
-map("n", "<leader>rn", vim.lsp.buf.rename,          "Zmień nazwę")
-map("n", "<leader>ca", vim.lsp.buf.code_action,     "Code action")
-map("n", "<leader>f",  vim.lsp.buf.format,          "Formatuj plik")
-map("n", "[d",         vim.diagnostic.goto_prev,    "Poprzedni błąd")
-map("n", "]d",         vim.diagnostic.goto_next,    "Następny błąd")
-map("n", "<leader>e",  vim.diagnostic.open_float,   "Pokaż błąd")
+-- LSP
+map("n", "gd", vim.lsp.buf.definition, "Go to definition")
+map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+map("n", "gr", vim.lsp.buf.references, "References")
+map("n", "K", vim.lsp.buf.hover, "Hover documentation")
+map("n", "<leader>rn", vim.lsp.buf.rename, "Rename symbol")
+map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
+map("n", "<leader>f", vim.lsp.buf.format, "Format file")
+map("n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")
+map("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
+map("n", "<leader>e", vim.diagnostic.open_float, "Show diagnostic")
 
--- ── Telescope ───────────────────────────────────────────────────────────────
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>",  "Szukaj plików")
-map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>",   "Szukaj tekstu (grep)")
-map("n", "<leader>fb", "<cmd>Telescope buffers<cr>",     "Lista buforów")
-map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>",   "Pomoc")
-map("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", "Diagnostyka LSP")
+-- Telescope
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", "Find files")
+map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", "Live grep")
+map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", "Buffers")
+map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", "Help tags")
+map("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", "Diagnostics")
 
--- ── Drzewo plików ────────────────────────────────────────────────────────────
-map("n", "<leader>t", "<cmd>NvimTreeToggle<cr>", "Drzewo plików")
+-- File explorer
+map("n", "<leader>t", "<cmd>NvimTreeToggle<cr>", "Toggle file explorer")
 
--- ── Terminal ─────────────────────────────────────────────────────────────────
-map("n", "<leader>T", "<cmd>terminal<cr>", "Otwórz terminal")
-map("t", "<Esc>",     "<C-\\><C-n>",       "Wyjdź z trybu terminala")
+-- Terminal
+map("n", "<leader>T", "<cmd>terminal<cr>", "Open terminal")
+map("t", "<Esc>", "<C-\\><C-n>", "Exit terminal mode")
 
--- ── Kompilacja / uruchamianie (C/C++) ───────────────────────────────────────
-map("n", "<leader>cc", "<cmd>!gcc -Wall -Wextra -o %:r %<cr>",       "Kompiluj (gcc)")
-map("n", "<leader>cx", "<cmd>!g++ -Wall -Wextra -std=c++17 -o %:r %<cr>", "Kompiluj (g++)")
-map("n", "<leader>cr", "<cmd>!./%:r<cr>",                             "Uruchom")
+-- Build / Run (C/C++)
+map("n", "<leader>cc", "<cmd>!gcc -Wall -Wextra -o %:r %<cr>", "Compile with gcc")
+map("n", "<leader>cx", "<cmd>!g++ -Wall -Wextra -std=c++17 -o %:r %<cr>", "Compile with g++")
+map("n", "<leader>cr", "<cmd>!./%:r<cr>", "Run executable")
