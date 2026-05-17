@@ -66,3 +66,7 @@ map("t", "<Esc>", "<C-\\><C-n>", "Exit terminal mode")
 map("n", "<leader>cc", "<cmd>!gcc -Wall -Wextra -o %:r %<cr>", "Compile with gcc")
 map("n", "<leader>cx", "<cmd>!g++ -Wall -Wextra -std=c++17 -o %:r %<cr>", "Compile with g++")
 map("n", "<leader>cr", "<cmd>!./%:r<cr>", "Run executable")
+
+-- My
+
+vim.keymap.set("i", "jk", "<Esc>", { noremap = true, silent = true })
